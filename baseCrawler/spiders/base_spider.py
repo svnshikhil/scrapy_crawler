@@ -1,3 +1,5 @@
+import os
+
 import scrapy
 # from link_extractor import LinkExtractor
 from scrapy.linkextractors.lxmlhtml import LxmlLinkExtractor
@@ -27,9 +29,10 @@ class BaseSpider(scrapy.Spider):
         print("TOTAL TIME TOOK | " + str(time.time() - links_processing_start) + " | TOTAL LINKS COUNT | " + str(len(links)))
         yield {
             'url': response.url,
-            'download_time': response.meta['__end_time'] - response.meta['__start_time'],
+            'download_time': 0,
             'download_latency': response.meta['download_latency']
         }
+        os._exit(1)
 
     def parseError(self, response):
         print('Error')
